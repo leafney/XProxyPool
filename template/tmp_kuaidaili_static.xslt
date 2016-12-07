@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
 <xsl:template match="/">
-<dailishow>
-<xsl:apply-templates select="//*[@id='index_free_list']/table/tbody/tr[position()>=1 and count(./td[position()=1]/text())>0 and count(./td[position()=2]/text())>0 and count(./td[position()=3]/text())>0 and count(./td[position()=4]/text())>0 and count(./td[position()=6]/text())>0]" mode="dailishow"/>
-</dailishow>
+<proxyshow>
+<xsl:apply-templates select="//*[@id='index_free_list']/table/tbody/tr[position()>=1 and count(./td[position()=1]/text())>0 and count(./td[position()=2]/text())>0 and count(./td[position()=3]/text())>0 and count(./td[position()=4]/text())>0 and count(./td[position()=6]/text())>0]" mode="proxyshow"/>
+</proxyshow>
 </xsl:template>
 
 
-<xsl:template match="//*[@id='index_free_list']/table/tbody/tr[position()>=1 and count(./td[position()=1]/text())>0 and count(./td[position()=2]/text())>0 and count(./td[position()=3]/text())>0 and count(./td[position()=4]/text())>0 and count(./td[position()=6]/text())>0]" mode="dailishow">
+<xsl:template match="//*[@id='index_free_list']/table/tbody/tr[position()>=1 and count(./td[position()=1]/text())>0 and count(./td[position()=2]/text())>0 and count(./td[position()=3]/text())>0 and count(./td[position()=4]/text())>0 and count(./td[position()=6]/text())>0]" mode="proxyshow">
 <item>
 <xip>
 <xsl:value-of select="td[position()=1]/text()"/>
