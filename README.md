@@ -8,6 +8,15 @@
 * lxml
 * selenium + phantomjs
 
+***
+
+#### Supported Proxy Site
+
+* [代理ip_免费ip代理服务器地址_http代理软件_免费ip代理_秘密代理IP](http://www.mimiip.com/)
+* [快代理 - 高速http代理ip每天更新](http://www.kuaidaili.com)
+* [高匿代理IP_免费ip代理_IP巴士](http://ip84.com/gn)
+* [免费代理IP_HTTP代理服务器IP_隐藏IP_QQ代理_国内外代理_西刺免费代理IP](http://www.xicidaili.com)
+
 #### xslt Template
 
 model Name `proxyshow`
@@ -116,6 +125,14 @@ The simple demo to see `test_run_old.py` for more details.
 另外一种简单的方法是直接作为 `动态` 网页数据通过 `phantomjs` 来处理，设置 `urlType=2` 即可。
 
 ***
+
+##### `{"dailishow": null}`
+
+还有一种情况下 xslt模板无法解析到数据。
+
+当网页中的列表是由 `<table>` 来展示的情况下，标签 `<tbody>` 可能会造成生成的 xpath规则错误。一般情况下，在Chrome的F12下，能看到 `<table>` 一般都是带有 `<tbody>` 的，而查看网页源代码的时候，静态页面中并没有 `<tbody>` 标签。
+
+这种情况下可以通过对抓取到的html源代码来进行解析生成 xslt模板文件。
 
 ***
 

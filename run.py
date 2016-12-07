@@ -325,7 +325,7 @@ def proxy_mimiip(jsonStr):
 				proxy_dict['xprotocal']=ps['xprotocal'].lower()
 				proxy_list.append(proxy_dict)
 	except Exception as e:
-		err_show='[proxy_kuaidaili]--error-{0}'.format(str(e))
+		err_show='[proxy_mimiip]--error-{0}'.format(str(e))
 		print(err_show)
 	finally:
 		return proxy_list
@@ -358,6 +358,66 @@ def proxy_kuaidaili(jsonStr):
 		print(err_show)
 	finally:
 		return proxy_list
+
+
+def proxy_ip84(jsonStr):
+	"""Ip84 -- 解析转换后的json
+	
+	Arguments:
+		jsonStr {[type]} -- [description]
+	
+	Returns:
+		[type] -- [description]
+	"""
+	obj=json.loads(jsonStr)
+	proxy_list=[]
+	try:
+		if obj['proxyshow']:
+			for ps in obj['proxyshow']['item']:
+				proxy_dict={}
+
+				proxy_dict['xip']=ps['xip']
+				proxy_dict['xport']=ps['xport']
+				proxy_dict['xaddr']=ps['xaddr'].replace('\n','')
+				proxy_dict['xlevel']=ps['xlevel']
+				proxy_dict['xprotocal']=ps['xprotocal'].lower()
+				proxy_list.append(proxy_dict)
+	except Exception as e:
+		err_show='[proxy_ip84]--error-{0}'.format(str(e))
+		print(err_show)
+	finally:
+		return proxy_list
+
+
+def proxy_xicidaili(jsonStr):
+	"""XiciDaili -- 解析转换后的json
+	
+	Arguments:
+		jsonStr {[type]} -- [description]
+	
+	Returns:
+		[type] -- [description]
+	"""
+	obj=json.loads(jsonStr)
+	proxy_list=[]
+	try:
+		if obj['proxyshow']:
+			for ps in obj['proxyshow']['item']:
+				proxy_dict={}
+
+				proxy_dict['xip']=ps['xip']
+				proxy_dict['xport']=ps['xport']
+				proxy_dict['xaddr']=ps['xaddr'].replace('\n','')
+				proxy_dict['xlevel']=ps['xlevel']
+				proxy_dict['xprotocal']=ps['xprotocal'].lower()
+				proxy_list.append(proxy_dict)
+	except Exception as e:
+		err_show='[proxy_mimiip]--error-{0}'.format(str(e))
+		print(err_show)
+	finally:
+		return proxy_list
+
+
 
 
 # ***********************
@@ -406,10 +466,24 @@ if __name__ == '__main__':
 
 
 	# 获取代理--kuaidaili  maxPage=10
-	url='http://www.kuaidaili.com/proxylist/{0}/'
-	tmpName=shelper.getFilePath('template','tmp_kuaidaili_static.xslt')
+	# url='http://www.kuaidaili.com/proxylist/{0}/'
+	# tmpName=shelper.getFilePath('template','tmp_kuaidaili_static.xslt')
+	# ps=ProxySpider()
+	# ps.get_proxy_ip(proxy_kuaidaili,url,tmpName,1)
+
+
+	# IP巴士  http://ip84.com
+	# url='http://ip84.com/dlgn/{0}'
+	# tmpName=shelper.getFilePath('template','tmp_ip84_static.xslt')
+	# ps=ProxySpider()
+	# ps.get_proxy_ip(proxy_ip84,url,tmpName,1)
+
+
+	# XiciDaili 国内高匿免费HTTP代理IP http://www.xicidaili.com/nn/2
+	url='http://www.xicidaili.com/nn/{0}'
+	tmpName=shelper.getFilePath('template','tmp_xicidaili_static.xslt')
 	ps=ProxySpider()
-	ps.get_proxy_ip(proxy_kuaidaili,url,tmpName,1)
+	ps.get_proxy_ip(proxy_xicidaili,url,tmpName,1)
 
 
 	print('ok')
