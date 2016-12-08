@@ -418,6 +418,8 @@ def proxy_xicidaili(jsonStr):
 		return proxy_list
 
 	# kx代理
+
+
 def proxy_kxdaili(jsonStr):
 	"""kxDaili -- 解析转换后的json
 	
@@ -448,6 +450,8 @@ def proxy_kxdaili(jsonStr):
 
 
 	# 小舒代理
+
+
 def proxy_xsdaili(jsonStr):
 	"""xsDaili -- 解析转换后的json
 	
@@ -486,13 +490,18 @@ if __name__ == '__main__':
 	"""
 
 	# 初始化数据库
-	# p=SqliteHelper()
-	# p.db_createTable()
+	# sh=SqliteHelper()
+	# sh.db_createTable()
 
 
 	# 检测数据库中代理可用性
 	# ps=ProxySpider()
 	# ps.verify_proxy_ip()
+
+
+	# 删除数据库中无用的代理数据并压缩数据库文件大小
+	# sh=SqliteHelper()
+	# sh.db_delete_proxy_ip_for_useless(1)
 
 
 	# *****************
@@ -515,10 +524,10 @@ if __name__ == '__main__':
 	"""
 
 	# mimiip
-	# url='http://www.mimiip.com/gngao/{0}'
-	# tmpName=shelper.getFilePath('template','tmp_mimiip_min_static.xslt')
-	# ps=ProxySpider()
-	# ps.get_proxy_ip(proxy_mimiip,url,tmpName,1)
+	url='http://www.mimiip.com/gngao/{0}'
+	tmpName=shelper.getFilePath('template','tmp_mimiip_min_static.xslt')
+	ps=ProxySpider()
+	ps.get_proxy_ip(proxy_mimiip,url,tmpName,1)
 
 
 
@@ -551,10 +560,10 @@ if __name__ == '__main__':
 
 
 	# xsDaili 小舒代理 http://www.xsdaili.com/index.php?s=/index/mfdl/p/2.html
-	url='http://www.xsdaili.com/index.php?s=/index/mfdl/p/{0}.html'
-	tmpName=shelper.getFilePath('template','tmp_xsdaili_static.xslt')
-	ps=ProxySpider()
-	ps.get_proxy_ip(proxy_xsdaili,url,tmpName,1)
+	# url='http://www.xsdaili.com/index.php?s=/index/mfdl/p/{0}.html'
+	# tmpName=shelper.getFilePath('template','tmp_xsdaili_static.xslt')
+	# ps=ProxySpider()
+	# ps.get_proxy_ip(proxy_xsdaili,url,tmpName,1)
 
 
 

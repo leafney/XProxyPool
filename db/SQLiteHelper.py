@@ -6,6 +6,9 @@ sqliteHelper
 
 import sqlite3
 import time
+import logging
+
+logger=logging.getLogger('spider.sqliteHelper')
 
 class SqliteHelper(object):
 	"""docstring for SqliteHelper"""
@@ -120,3 +123,19 @@ class SqliteHelper(object):
 	def close(self):
 		self.cursor.close()
 		self.database.close()
+
+	def db_delete_proxy_ip_for_useless(self,pstatus):
+		"""
+		删除数据库中指定状态的数据，并压缩sqlite文件大小
+		"""
+
+		sql_delete='''
+		DELETE FROM proxyip	WHERE xstatus=?
+		'''
+		self.cursor.execute(sql_delete,(pstatus,))
+		self.db_compress() # 压缩数据库大小
+		self.commit() # 提交修改
+		logging.info('删除数据库中指定状态的数据，并压缩sqlite文件大小')
+		
+
+
