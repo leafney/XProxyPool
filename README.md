@@ -3,7 +3,7 @@
 #### 用Python搭建高匿代理池
 
 * Python
-* xslt
+* xslt  (What is xslt ? To see [W3School XSLT 教程](https://wizardforcel.gitbooks.io/w3school-xml/content/part6.html))
 * sqlite3
 * lxml
 * selenium + phantomjs
@@ -16,6 +16,8 @@
 * [快代理 - 高速http代理ip每天更新](http://www.kuaidaili.com)
 * [高匿代理IP_免费ip代理_IP巴士](http://ip84.com/gn)
 * [免费代理IP_HTTP代理服务器IP_隐藏IP_QQ代理_国内外代理_西刺免费代理IP](http://www.xicidaili.com)
+* [开心代理IP平台 | 时刻在更新的专业代理IP平台](http://www.kxdaili.com)
+* [小舒代理ip_服务器http代理_最新ip代理_免费ip提取网站_国内外代理_免费代理ip](http://www.xsdaili.com)
 
 #### xslt Template
 
@@ -28,6 +30,18 @@ model Name `proxyshow`
 * `xprotocal`  类型 http https
 
 #### Test
+
+See `run.py` for more details.
+
+```
+	# mimiip
+	url='http://www.mimiip.com/gngao/{0}'
+	tmpName=shelper.getFilePath('template','tmp_mimiip_min_static.xslt')
+	ps=ProxySpider()
+	ps.get_proxy_ip(proxy_mimiip,url,tmpName,1)
+```
+
+#### Simple Test
 
 The simple demo to see `test_run_old.py` for more details.
 
@@ -118,11 +132,11 @@ The simple demo to see `test_run_old.py` for more details.
 
 该错误是 xslt在解析html源代码时，未解析到相应数据导致的。
 
-可能的一种情况是：如 []() 页面，通过查看网页的源代码发现页面数据时静态的，然而我们直接通过该静态页面得到的xslt模板文件却在程序中调用时无法获取到内容。
+可能的一种情况是：如 [秘密代理IP](http://www.mimiip.com/gngao/) 页面，通过查看网页的源代码发现页面数据是静态的，然而我们直接通过该静态页面得到的xslt模板文件却在程序中调用时无法获取到内容。
 
 可以通过方法 `get_proxy_ip()` 在获取网页html内容时，将html源代码通过方法 `page_htmlStr=doSpider.htmlStr` 保存到日志中，然后再对获取到的html源代码进行处理后得到xslt模板文件，通过该模板文件就能获取到想要的数据了。
 
-另外一种简单的方法是直接作为 `动态` 网页数据通过 `phantomjs` 来处理，设置 `urlType=2` 即可。
+另外一种简单的方法是直接作为 `动态` 网页数据通过 `phantomjs` 来处理，设置参数 `urlType=2` 即可。
 
 ***
 
@@ -130,9 +144,9 @@ The simple demo to see `test_run_old.py` for more details.
 
 还有一种情况下 xslt模板无法解析到数据。
 
-当网页中的列表是由 `<table>` 来展示的情况下，标签 `<tbody>` 可能会造成生成的 xpath规则错误。一般情况下，在Chrome的F12下，能看到 `<table>` 一般都是带有 `<tbody>` 的，而查看网页源代码的时候，静态页面中并没有 `<tbody>` 标签。
+仍以 [秘密代理IP](http://www.mimiip.com/gngao/) 页面为例，当网页中的列表是由 `<table>` 表格来展示的情况下，标签 `<tbody>` 可能会造成生成的 xpath规则 错误。一般情况下，在Chrome的F12下，能看到 `<table>` 一般都是带有 `<tbody>` 的，而查看网页源代码的时候，静态页面中并没有 `<tbody>` 标签。
 
-这种情况下可以通过对抓取到的html源代码来进行解析生成 xslt模板文件。
+这种情况下可以对通过程序抓取到的html源代码 `page_htmlStr=doSpider.htmlStr` 进行解析来生成xslt模板文件。
 
 ***
 

@@ -417,7 +417,64 @@ def proxy_xicidaili(jsonStr):
 	finally:
 		return proxy_list
 
+	# kx代理
+def proxy_kxdaili(jsonStr):
+	"""kxDaili -- 解析转换后的json
+	
+	Arguments:
+		jsonStr {[type]} -- [description]
+	
+	Returns:
+		[type] -- [description]
+	"""
+	obj=json.loads(jsonStr)
+	proxy_list=[]
+	try:
+		if obj['proxyshow']:
+			for ps in obj['proxyshow']['item']:
+				proxy_dict={}
 
+				proxy_dict['xip']=ps['xip']
+				proxy_dict['xport']=ps['xport']
+				proxy_dict['xaddr']=ps['xaddr']
+				proxy_dict['xlevel']=ps['xlevel']
+				proxy_dict['xprotocal']=(ps['xprotocal'].split(',')[0]).lower()  # HTTP, HTTPS 多种时只取第一种
+				proxy_list.append(proxy_dict)
+	except Exception as e:
+		err_show='[proxy_kxdaili]--error-{0}'.format(str(e))
+		print(err_show)
+	finally:
+		return proxy_list
+
+
+	# 小舒代理
+def proxy_xsdaili(jsonStr):
+	"""xsDaili -- 解析转换后的json
+	
+	Arguments:
+		jsonStr {[type]} -- [description]
+	
+	Returns:
+		[type] -- [description]
+	"""
+	obj=json.loads(jsonStr)
+	proxy_list=[]
+	try:
+		if obj['proxyshow']:
+			for ps in obj['proxyshow']['item']:
+				proxy_dict={}
+
+				proxy_dict['xip']=ps['xip']
+				proxy_dict['xport']=ps['xport']
+				proxy_dict['xaddr']=ps['xaddr'].replace('\t','').replace('\n','').replace(' ','') # 替换制表符、回车和空格
+				proxy_dict['xlevel']=ps['xlevel']
+				proxy_dict['xprotocal']=ps['xprotocal'].lower()
+				proxy_list.append(proxy_dict)
+	except Exception as e:
+		err_show='[proxy_kxdaili]--error-{0}'.format(str(e))
+		print(err_show)
+	finally:
+		return proxy_list
 
 
 # ***********************
@@ -465,7 +522,7 @@ if __name__ == '__main__':
 
 
 
-	# 获取代理--kuaidaili  maxPage=10
+	# 快代理--kuaidaili  maxPage=10
 	# url='http://www.kuaidaili.com/proxylist/{0}/'
 	# tmpName=shelper.getFilePath('template','tmp_kuaidaili_static.xslt')
 	# ps=ProxySpider()
@@ -480,10 +537,25 @@ if __name__ == '__main__':
 
 
 	# XiciDaili 国内高匿免费HTTP代理IP http://www.xicidaili.com/nn/2
-	url='http://www.xicidaili.com/nn/{0}'
-	tmpName=shelper.getFilePath('template','tmp_xicidaili_static.xslt')
+	# url='http://www.xicidaili.com/nn/{0}'
+	# tmpName=shelper.getFilePath('template','tmp_xicidaili_static.xslt')
+	# ps=ProxySpider()
+	# ps.get_proxy_ip(proxy_xicidaili,url,tmpName,1)
+
+
+	# kxDaili 开心代理 http://www.kxdaili.com/dailiip/1/10.html#ip
+	# url='http://www.kxdaili.com/dailiip/1/{0}.html#ip'
+	# tmpName=shelper.getFilePath('template','tmp_kxdaili_static.xslt')
+	# ps=ProxySpider()
+	# ps.get_proxy_ip(proxy_kxdaili,url,tmpName,1)
+
+
+	# xsDaili 小舒代理 http://www.xsdaili.com/index.php?s=/index/mfdl/p/2.html
+	url='http://www.xsdaili.com/index.php?s=/index/mfdl/p/{0}.html'
+	tmpName=shelper.getFilePath('template','tmp_xsdaili_static.xslt')
 	ps=ProxySpider()
-	ps.get_proxy_ip(proxy_xicidaili,url,tmpName,1)
+	ps.get_proxy_ip(proxy_xsdaili,url,tmpName,1)
+
 
 
 	print('ok')
